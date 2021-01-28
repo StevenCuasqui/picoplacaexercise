@@ -4,7 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-public class AppTest 
+public class TimeTest 
 {
     @Test
     public void shouldAnswerWithTrue()
