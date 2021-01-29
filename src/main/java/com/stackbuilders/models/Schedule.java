@@ -4,6 +4,10 @@ public class Schedule {
 	private Time start;
 	private Time finish;
 	
+	public Schedule() {
+		super();
+	}
+
 	public Schedule(Time start, Time finish) {
 		super();
 		this.start = start;

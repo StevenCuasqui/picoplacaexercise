@@ -4,6 +4,10 @@ public class Time {
 	private int hour;
 	private int minutes;
 	
+	public Time() {
+		super();
+	}
+
 	public Time(int hour, int minutes) {
 		super();
 		this.hour = hour;

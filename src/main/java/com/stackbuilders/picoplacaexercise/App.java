@@ -1,14 +1,24 @@
 package com.stackbuilders.picoplacaexercise;
 
-import javax.swing.JOptionPane;
+import com.stackbuilders.controllers.PlateController;
 
 public class App 
 {
     public static void main( String[] args ){
-        System.out.println( "Hello World!" );
+    	
+        PlateController userPlate = new PlateController();
+        userPlate.obtainUserPlate();
+        System.out.println(userPlate.userLicensePlate);
         
-        String placa = "";
-        placa = JOptionPane.showInputDialog("Please enter your plate: ");
-        System.out.println(placa);
+        
+    	/*
+    	1. Ask Plate
+    	2. Ask Date
+    	3. Show Rules
+    	4. Show permission
+    	*/
+    	
     }
+    
+    
 }

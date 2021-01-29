@@ -3,6 +3,10 @@ package com.stackbuilders.models;
 public class LicensePlate {
 	private String letters;
 	private String numbers;
+	
+	public LicensePlate() {
+		super();
+	}
 
 	public LicensePlate(String letters, String numbers) {
 		super();

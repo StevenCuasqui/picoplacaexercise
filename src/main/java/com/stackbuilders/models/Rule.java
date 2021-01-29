@@ -6,6 +6,10 @@ public class Rule {
 	private String day;
 	private char[] digits;
 	
+	public Rule() {
+		super();
+	}
+
 	public Rule(String day, char[] digits) {
 		super();
 		this.day = day;
