@@ -2,6 +2,7 @@ package com.stackbuilders.picoplacaexercise;
 
 import com.stackbuilders.controllers.DateController;
 import com.stackbuilders.controllers.PlateController;
+import com.stackbuilders.services.PicoPlacaValidator;
 
 public class App 
 {
@@ -22,6 +23,9 @@ public class App
         userDate.obtainDate();
         
         System.out.println(userDate.actualDate);
+        
+        PicoPlacaValidator picoPlacaCheck = new PicoPlacaValidator();
+        System.out.println(picoPlacaCheck.picoPlacaSchedule);
         
     	
     	

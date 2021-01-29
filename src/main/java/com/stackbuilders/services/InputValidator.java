@@ -7,27 +7,43 @@ import com.stackbuilders.models.Date;
 import com.stackbuilders.models.LicensePlate;
 
 public class InputValidator {
-	private Pattern patternSection1;
-	private Pattern patternSection2;
-	private Matcher matcher1;
-	private Matcher matcher2;
+	private Pattern patternSection;
+	private Matcher matcher;
 	
 	public boolean plateValidation(LicensePlate testingPlate) {
 		
-		patternSection1 = Pattern.compile("^[A-Z]{3}$");
-		patternSection2 = Pattern.compile("^\\d{3,4}$");
+		patternSection = Pattern.compile("^[A-Z]{3}$");
+		matcher = patternSection.matcher(testingPlate.getLetters());
 		
-		matcher1 = patternSection1.matcher(testingPlate.getLetters());
-		matcher2 = patternSection2.matcher(testingPlate.getNumbers());
-
-		if(matcher1.find() && matcher2.find()) {
-			return true;
+		if(matcher.find()) {
+			
+			patternSection = Pattern.compile("^\\d{3,4}$");
+			matcher = patternSection.matcher(testingPlate.getNumbers());
+			
+			if(matcher.find()) {
+				return true;
+			}
 		}
+		
 		return false;
 	}
 	
 	public boolean dateValidation(Date testingDate) {
-		return true;
+		
+		patternSection = Pattern.compile("^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)$");
+		matcher = patternSection.matcher(testingDate.getDay());
+		
+		if(matcher.find()) {
+			
+			if((testingDate.getTime().getHour() >= 0) && (testingDate.getTime().getHour() <= 23 )) {
+				if((testingDate.getTime().getMinutes() >= 0) && (testingDate.getTime().getMinutes() <= 59) ){
+					return true;
+				}
+			
+			}
+			
+		}
+		return false;
 	}
 	
 

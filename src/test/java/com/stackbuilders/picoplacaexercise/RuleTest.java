@@ -13,7 +13,7 @@ public class RuleTest
 	Rule ruleTest;
 	@Before
 	public void setUp() throws Exception{
-		ruleTest = new Rule("Monday",new char[] {1,2});
+		ruleTest = new Rule("Monday",new char[] {'1','2'});
 	}
 	
     @Test
@@ -25,7 +25,7 @@ public class RuleTest
     
     @Test
     public void creationDigitsTest(){
-    	char[] digits = new char[] {1,2};
+    	char[] digits = new char[] {'1','2'};
     	Rule ruleTest = new Rule();
     	ruleTest.setDigits(digits);
         assertArrayEquals(this.ruleTest.getDigits(), ruleTest.getDigits());

@@ -55,16 +55,16 @@ public class DateController {
 				"37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56",
 				"57","58","59"};
 		
-		JComboBox days = new JComboBox(daysWeek);
-		JComboBox hours = new JComboBox(hoursDay);
-		JComboBox minutes = new JComboBox(minutesHour);
+		JComboBox<String> days = new JComboBox<String>(daysWeek);
+		JComboBox<String> hours = new JComboBox<String>(hoursDay);
+		JComboBox<String> minutes = new JComboBox<String>(minutesHour);
 		
 		JPanel message = new JPanel();
 		message.add(new JLabel("Date:\n"));
 		message.add(days);
 		message.add(new JLabel("Hour:\n"));
 		message.add(hours);
-		message.add(new JLabel("minute:\n"));
+		message.add(new JLabel("Minute:\n"));
 		message.add(minutes);
 		
 	    
