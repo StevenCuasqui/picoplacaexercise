@@ -6,28 +6,47 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import com.stackbuilders.models.LicensePlate;
+import com.stackbuilders.services.InputValidator;
 
 public class PlateController {
 	
 	public LicensePlate userLicensePlate;
 	
 	public LicensePlate obtainUserPlate() {
+		boolean indicator = false;
 		
-		//Response obtained from Panel- null or data
-    	String[] response = loadPlateView();
     	
-    	if(response != null) {
+    	do {
+    		//Response obtained from Panel- null or data
+    		String[] response = loadPlateView();
     		
-    		String sPlate1 = response[0];
-            String sPlate2 = response[1];
-            userLicensePlate = new LicensePlate();
-            userLicensePlate.setLetters(sPlate1);
-            userLicensePlate.setNumbers(sPlate2);
-            return userLicensePlate;
-    	}else {
-    		System.out.println("Se ha cancelado");
-    	}
-		return userLicensePlate;
+    		if(response != null) {
+        		
+        		String sPlate1 = response[0];
+                String sPlate2 = response[1];
+                userLicensePlate = new LicensePlate();
+                userLicensePlate.setLetters(sPlate1);
+                userLicensePlate.setNumbers(sPlate2);
+                
+                InputValidator plate = new InputValidator();
+                if(plate.plateValidation(userLicensePlate)) {
+                	
+                	System.out.println("Valid Plate");
+                	indicator = true;
+                	return userLicensePlate;
+                	
+                }else {
+                	JOptionPane.showMessageDialog(null, "Invalid License Plate");
+                }
+                
+        	}else {
+        		indicator = true;
+        		System.out.println("Plate input cancelled");
+        	}
+    	}while(!indicator);
+    	
+    	
+		return null;
     }
 	
 	private String[] loadPlateView() {
@@ -46,7 +65,7 @@ public class PlateController {
         int result = JOptionPane.showConfirmDialog(null, message, "Enter License Plate", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
 		
         if(result == JOptionPane.OK_OPTION) {
-        	data = new String[]{plateSection1.getText(),plateSection2.getText()};
+        	data = new String[]{plateSection1.getText().toUpperCase(),plateSection2.getText()};
         }
         
 		return data;

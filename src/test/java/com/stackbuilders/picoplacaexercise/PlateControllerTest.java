@@ -21,6 +21,7 @@ public class PlateControllerTest{
 	@Test
 	public void setLicensePlateTest() {
 		PlateController testPlateController = new PlateController();
+		System.out.println("Ingrese la placa: AAA - 1234");
 		LicensePlate testingPlate = testPlateController.obtainUserPlate();
 		assertEquals(testPlate.toString(), testingPlate.toString());
 	}
