@@ -5,6 +5,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import com.stackbuilders.models.Date;
+import com.stackbuilders.models.LicensePlate;
 import com.stackbuilders.models.Schedule;
 import com.stackbuilders.models.Time;
 import com.stackbuilders.services.PicoPlacaValidator;
@@ -84,6 +86,23 @@ public class PicoPlacaValidatorTest {
 		assertTrue(validatorTest.isRestrictedTime(testTime10));
 		assertTrue(validatorTest.isRestrictedTime(testTime11));
 		assertFalse(validatorTest.isRestrictedTime(testTime12));
+	}
+	
+	@Test
+	public void isRestrictedTest() {
+		LicensePlate testLicensePlate = new LicensePlate("AAA","1234");
+		Date testDate = new Date("Monday", new Time(8,0));
+		Date testDate2 = new Date("Tuesday", new Time(8,0));
+		Date testDate3 = new Date("Tuesday", new Time(9,31));
+		
+		Date testDate4 = new Date("Tuesday", new Time(16,0));
+		Date testDate5 = new Date("Tuesday", new Time(19,31));
+		
+		assertFalse(validatorTest.isRestricted(testLicensePlate, testDate));
+		assertTrue(validatorTest.isRestricted(testLicensePlate, testDate2));
+		assertFalse(validatorTest.isRestricted(testLicensePlate, testDate3));
+		assertTrue(validatorTest.isRestricted(testLicensePlate, testDate4));
+		assertFalse(validatorTest.isRestricted(testLicensePlate, testDate5));
 	}
 
 }

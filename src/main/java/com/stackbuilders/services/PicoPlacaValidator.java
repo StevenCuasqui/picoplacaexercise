@@ -39,9 +39,25 @@ public class PicoPlacaValidator {
 	
 	public boolean isRestricted(LicensePlate candidatePlate, Date checkingDate ) {
 		if(isRestrictedTime(checkingDate.getTime())) {
-			//Check last Digit
+			//Check Date and last Digit
+			
+			for(Rule rule:picoPlacaRules) {
+				
+				if(rule.getDay() == checkingDate.getDay()) {
+					for(char digit:rule.getDigits()) {
+						
+						//Get last Digit of Plate
+						String numbersOfPlate = candidatePlate.getNumbers();
+						char lastDigit = numbersOfPlate.charAt(numbersOfPlate.length() - 1);
+						if(digit == lastDigit) {
+							return true;
+						}
+					}
+				}
+
+			}
 		}
-		System.out.println("It is not in period of restriction");
+		System.out.println("It is not a period of restriction");
 		return false;
 	}
 	
