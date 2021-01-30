@@ -37,15 +37,65 @@ public class PicoPlacaValidator {
 		
 	}
 	
-	public boolean isAllowed(LicensePlate candidatePlate, Date checkingDate ) {
-		
-		
-		
+	public boolean isRestricted(LicensePlate candidatePlate, Date checkingDate ) {
+		if(isRestrictedTime(checkingDate.getTime())) {
+			//Check last Digit
+		}
+		System.out.println("It is not in period of restriction");
 		return false;
 	}
 	
-	private boolean isRestrictedTime() {
+	public boolean isRestrictedTime(Time actualTime) {
+		
+		for(Schedule periodOfRestriction:picoPlacaSchedule) {
+			if(isTimeInRestrictedPeriod(periodOfRestriction,actualTime)) {
+				return true;
+			}
+		}
 		return false;
+	}
+	
+	public boolean isTimeInRestrictedPeriod(Schedule period,Time actualTime) {
+		
+		if(actualTime.getHour() == period.getStart().getHour()) {
+			//If hour is equal than start hour
+
+			if(actualTime.getMinutes() >= period.getStart().getMinutes()) {
+				//If minutes are greater or equal
+				//Check if is less than finishHour
+				return isTimeLessThanOtherTime(actualTime,period.getFinish());
+			}
+			
+			//Minutes less than minutesStartHour
+			return false;
+		}else if(actualTime.getHour() > period.getStart().getHour()) {
+			//If hour is greater than start hour
+			return isTimeLessThanOtherTime(actualTime,period.getFinish()); 
+		}
+		//If hour is less than startHour
+		return false;
+	}
+	
+	public boolean isTimeLessThanOtherTime(Time testTime, Time limitTime) {
+		
+		if(testTime.getHour() == limitTime.getHour()) {
+			//If hours are equal
+			//Check minutes
+			if(testTime.getMinutes() <= limitTime.getMinutes()) {
+				//if minutes are less than minutes limit
+				return true;
+			}
+			//Minutes greater
+			return false;
+			
+		}else if(testTime.getHour() < limitTime.getHour()) {
+			//if hour is less than hour limit
+			return true;
+		}
+		
+		//Hour greater than hour limitTime
+		return false;
+		
 	}
 
 
